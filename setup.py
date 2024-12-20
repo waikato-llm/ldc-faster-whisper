@@ -13,7 +13,7 @@ def _read(f):
 
 
 setup(
-    name="ldc-faster-whisper",
+    name="ldc_faster_whisper",
     description="Python3 library that adds audio transcription support (.wav, .mp3) to the llm-dataset-converter library.",
     long_description=(
             _read('DESCRIPTION.rst') + b'\n' +
