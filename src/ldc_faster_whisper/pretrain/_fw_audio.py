@@ -5,11 +5,12 @@ from faster_whisper import WhisperModel
 
 from wai.logging import LOGGING_WARNING
 from seppl.io import locate_files
+from seppl.placeholders import PlaceholderSupporter, placeholder_list
 from ldc.core import domain_suffix
 from ldc.api.pretrain import PretrainData, PretrainReader
 
 
-class FasterWhisperAudioPretrainReader(PretrainReader):
+class FasterWhisperAudioPretrainReader(PretrainReader, PlaceholderSupporter):
     """
     Transcribes text from audio files (.wav, .mp3) to use for pretraining.
     """
@@ -74,8 +75,8 @@ class FasterWhisperAudioPretrainReader(PretrainReader):
         :rtype: argparse.ArgumentParser
         """
         parser = super()._create_argparser()
-        parser.add_argument("-i", "--input", type=str, help="Path to the audio file(s) to read (.wav, .mp3); glob syntax is supported", required=False, nargs="*")
-        parser.add_argument("-I", "--input_list", type=str, help="Path to the text file(s) listing the audio files to use (.wav, .mp3)", required=False, nargs="*")
+        parser.add_argument("-i", "--input", type=str, help="Path to the audio file(s) to read (.wav, .mp3); glob syntax is supported; " + placeholder_list(obj=self), required=False, nargs="*")
+        parser.add_argument("-I", "--input_list", type=str, help="Path to the text file(s) listing the audio files to use (.wav, .mp3); " + placeholder_list(obj=self), required=False, nargs="*")
         parser.add_argument("-1", "--combine_segments", action="store_true", help="Whether to combine the segments into a single document or forward them one-by-one", required=False)
         parser.add_argument("-m", "--model_size", type=str, help="The size of the whisper model to use, e.g., 'base' or 'large-v3'", required=False, default="base")
         parser.add_argument("-d", "--device", type=str, help="The device to run on, e.g., 'cuda' or 'cpu'", required=False, default="cpu")
