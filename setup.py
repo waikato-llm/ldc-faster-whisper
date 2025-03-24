@@ -32,7 +32,7 @@ setup(
     packages=find_namespace_packages(where='src'),
     install_requires=[
         "llm_dataset_converter>=0.2.3",
-        "faster-whisper",
+        "faster_whisper",
     ],
     version="0.0.2",
     author='Peter Reutemann',
