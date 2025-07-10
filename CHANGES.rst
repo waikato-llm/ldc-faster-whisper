@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.0.3 (????-??-??)
+0.0.3 (2025-07-11)
 ------------------
 
 - using `faster_whisper` instead of `faster-whisper` as dependency
